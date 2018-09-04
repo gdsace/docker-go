@@ -1,0 +1,32 @@
+{
+  "name": "docker-go",
+  "version": "0.0.0",
+  "description": "docker base images for go application",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gdsace/docker-go.git"
+  },
+  "keywords": [
+    "docker",
+    "go"
+  ],
+  "author": "GDS ACE",
+  "contributors": [
+    {
+      "name": "Laurent Maillet",
+      "email": "nebounet@gmail.com"
+    }, {
+      "name": "Zephinzer",
+      "email": "dev@joeir.net"
+    }
+  ],
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/gdsace/docker-go/issues"
+  },
+  "homepage": "https://github.com/gdsace/docker-go#readme"
+}

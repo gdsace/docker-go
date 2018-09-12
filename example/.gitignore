@@ -1,5 +1,5 @@
 *
 !.gitignore
-Dockerfile
-Makefile
-main.gitignore
+!Dockerfile
+!Makefile
+!main.go

@@ -12,7 +12,7 @@ after_script:
 - docker logout
 script:
 # prepare Makefile.properties
-- echo "DOCKERUSER=myuser" > Makefile.properties
+- echo "DOCKERUSER=govtechsg" > Makefile.properties
 - echo "DOCKERREGISTRY=docker.io" >> Makefile.properties
 - cat Makefile.properties
 # check if example works

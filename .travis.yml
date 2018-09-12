@@ -1,19 +1,20 @@
+# required variables (configure your pipeline to store these)
+#   DH_USERNAME: DockerHub username
+#   DH_PASSWORD: DockerHub password
+
 sudo: required
 language: bash
 services:
 - docker
-stages:
-- build
 before_script:
 - docker login -u "${DH_USERNAME}" -p "${DH_PASSWORD}";
 after_script:
 - docker logout
-jobs:
-  include:
-  - stage: build
-    if: branch = master
-    env:
-    - IMAGE_NAME: go
-    script:
-    - ./build.sh "${DH_REPO}" "${IMAGE_NAME}" "./go";
-    - COMMIT_MESSAGE="${TRAVIS_COMMIT_MESSAGE}" ./publish.sh "${DH_REPO}" "${IMAGE_NAME}";
+script:
+# prepare Makefile.properties
+- echo "DOCKERUSER=myuser" > Makefile.properties
+- echo "DOCKERREGISTRY=docker.io" >> Makefile.properties
+# check if example works
+- make test.example 
+# run the build/publish, see Makefile for more info
+- make publish

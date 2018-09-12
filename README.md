@@ -1,36 +1,63 @@
-# Go Containers
+# Golang Container
 
-[![Build Status](https://travis-ci.com/gdsace/docker-go.svg?branch=master)](https://travis-ci.com/gdsace/docker-go/)
-
-This repository is a collection of Docker images we use internally for go applications.
+[![Build Status](https://travis-ci.com/gdsace/docker-golang.svg?branch=master)](https://travis-ci.com/gdsace/docker-golang/)
 
 Daily builds are run against these images and automatically sent to our DockerHub repository at:
 
-https://hub.docker.com/r/govtechsg/go/
+https://hub.docker.com/r/govtechsg/golang/
 
-## Methodology
-All runtimes are built from official sources using the methods documented in the runtimes' official documentation.
+## Additional Tooling
+- [Realize for live-reloads](https://github.com/oxequa/realize)
+- [Dep for dependency management](https://github.com/golang/dep)
 
-### Usage/Description
-Canonical Tag: `go-<GO_VERSION>`
-Latest URL: `govtechsg/go-latest`
+## Example Usage
+The following example is also available in [the example directory](./example).
 
-## How to use
-
-### Build
-The build script creates the build for the specified image. For instance to build image with go v1.10.4:
-
-```bash
-DH_REPO=govtechsg/go
-IMAGE_NAME=go
-./build.sh "${DH_REPO}" "${IMAGE_NAME}"
+### Example Dockerfile
+```dockerfile
+FROM govtechsg/golang:1.11
+ARG PROJECT_NAME=app
+USER app
+WORKDIR /go/src/${PROJECT_NAME}
+COPY . /go/src/${PROJECT_NAME}
 ```
 
-### Publish
-The publish script sends your built image to DockerHub and relies on the build script being run prior to it. For instance to publish a previously built image with go v1.10.4:
+Build it with:
 
 ```bash
-DH_REPO=govtechsg/go
-IMAGE_NAME=go
-./publish.sh "${DH_REPO}" "${IMAGE_NAME}"
+docker build --build-arg PROJECT_NAME=${PROJECT_NAME} -t app .
 ```
+
+> In example directory: `make build`
+
+### Initialise Dep
+
+For initialising a dependency management strategy:
+
+```bash
+docker run -v "$(pwd):/go/src/${PROJECT_NAME}" app dep init
+```
+
+For ensuring all dependencies are installed:
+
+```bash
+docker run -v "$(pwd):/go/src/${PROJECT_NAME}" app dep ensure
+```
+
+> In example directory: `make init` (does both depending on whether `dep init` fails)
+
+### Developing with live-reload
+
+```bash
+docker run -v "$(pwd):/go/src/${PROJECT_NAME}" app realize start --run main.go
+```
+
+> In example directory: `make run`
+
+### Compiling
+
+```bash
+docker run -v "$(pwd):/go/src/${PROJECT_NAME}" app go build -o app
+```
+
+> In example directory: `make compile`

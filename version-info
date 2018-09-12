@@ -1,7 +1,0 @@
-#!/bin/sh
-VERSION_ALPINE="$(cat /etc/alpine-release)";
-printf "alpine:${VERSION_ALPINE}\n";
-
-VERSION_GO="$(go version | cut -d ' ' -f 3 | cut -f 2 -d 'o')";
-printf "go:${VERSION_GO}\n";
-

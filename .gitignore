@@ -1,2 +1,5 @@
 .idea
 *.iml
+.make.build.tags
+.make.build.go
+Makefile.properties

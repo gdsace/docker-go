@@ -4,8 +4,8 @@ LABEL maintainer="dev@joeir.net" \
   version="1.0.0" \
   description="A minimal Go base image to build Go applications with."
 ARG GO_VERSION="go1.9.3"
-ENV APK_TO_INSTALL="bash curl git gcc g++ make linux-headers binutils-gold gnupg" \
-  APK_TO_REMOVE="gcc g++ make linux-headers binutils-gold gnupg" \
+ENV APK_TO_INSTALL="bash curl git gcc musl-dev make linux-headers binutils-gold gnupg" \
+  APK_TO_REMOVE="g++ make linux-headers binutils-gold gnupg" \
   GO_REPO_URL="https://go.googlesource.com/go" \
   GO_VERSION_LAST_C_TOOLCHAIN="go1.4" \
   # this needs to be set or else go will complain
@@ -44,13 +44,14 @@ RUN apk add --update --upgrade --no-cache ${APK_TO_INSTALL} \
   && rm -rf ${PATHS_TO_REMOVE}
 ARG USER_ID=1000
 RUN adduser -H -D -u ${USER_ID} app \
+  && mkdir -p /home/app/.cache \
   && mkdir -p /.cache \
   && chown app:app /.cache \
   && mkdir -p ${GOPATH}/src \
   && chown app:app ${GOPATH}/src \
   && mkdir -p ${GOPATH}/bin \
   && chown app:app ${GOPATH}/bin \
-  && chmod 777 -R ${GOPATH} /.cache
+  && chmod 777 -R ${GOPATH} /.cache /home/app/.cache
 # install dep dependency management tool
 RUN curl -s https://raw.githubusercontent.com/golang/dep/master/install.sh | sh
 # install development tools concurrently

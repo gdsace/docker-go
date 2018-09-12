@@ -13,17 +13,17 @@ ENV APK_TO_INSTALL="bash curl git gcc musl-dev make linux-headers binutils-gold 
   GOROOT="/usr/local/go" \
   GOPATH="/go" \
   PATHS_TO_REMOVE="\
-  /tmp/* \
-  /usr/include/* \
-  /usr/share/man/* \
-  /var/cache/apk/* \
-  /root/.cache \
-  /usr/local/go/.git \
-  /usr/local/go/.gitattributes \
-  /usr/local/go/.github \
-  /usr/local/go/test \
-  /usr/local/go/pkg/bootstrap \
-  /usr/local/go/pkg/obj" \
+    /tmp/* \
+    /usr/include/* \
+    /usr/share/man/* \
+    /var/cache/apk/* \
+    /root/.cache \
+    /usr/local/go/.git \
+    /usr/local/go/.gitattributes \
+    /usr/local/go/.github \
+    /usr/local/go/test \
+    /usr/local/go/pkg/bootstrap \
+    /usr/local/go/pkg/obj" \
   SYSTEM_BIN_PATH=/usr/local/bin/
 WORKDIR /tmp
 RUN apk add --update --upgrade --no-cache ${APK_TO_INSTALL} \

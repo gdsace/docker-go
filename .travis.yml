@@ -15,6 +15,8 @@ script:
 - echo "DOCKERUSER=govtechsg" > Makefile.properties
 - echo "DOCKERREGISTRY=docker.io" >> Makefile.properties
 - cat Makefile.properties
+- ls -al ./example
+- cat ./example/Makefile
 # check if example works
 - make test.example 
 # run the build/publish, see Makefile for more info

@@ -8,6 +8,7 @@ https://hub.docker.com/r/govtechsg/golang/
 
 ## Additional Tooling
 - [Realize for live-reloads](https://github.com/oxequa/realize)
+- [GoConvey for test watching](https://github.com/smartystreets/goconvey)
 - [Dep for dependency management](https://github.com/golang/dep)
 
 ## Example Usage

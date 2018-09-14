@@ -4,8 +4,8 @@ LABEL maintainer="dev@joeir.net" \
   version="1.0.0" \
   description="A minimal Go base image to build Go applications with."
 ARG GO_VERSION="go1.9.3"
-ENV APK_TO_INSTALL="bash curl git gcc musl-dev make linux-headers binutils-gold gnupg" \
-  APK_TO_REMOVE="g++ make linux-headers binutils-gold gnupg" \
+ENV APK_TO_INSTALL="bash curl git gcc g++ make linux-headers binutils-gold gnupg" \
+  APK_TO_REMOVE="make linux-headers binutils-gold gnupg" \
   GO_REPO_URL="https://go.googlesource.com/go" \
   GO_VERSION_LAST_C_TOOLCHAIN="go1.4" \
   # this needs to be set or else go will complain
@@ -14,7 +14,6 @@ ENV APK_TO_INSTALL="bash curl git gcc musl-dev make linux-headers binutils-gold 
   GOPATH="/go" \
   PATHS_TO_REMOVE="\
     /tmp/* \
-    /usr/include/* \
     /usr/share/man/* \
     /var/cache/apk/* \
     /root/.cache \
@@ -57,6 +56,7 @@ RUN curl -s https://raw.githubusercontent.com/golang/dep/master/install.sh | sh
 # install development tools concurrently
 RUN go get -u -v github.com/golang/lint/golint \
   & go get -u -v github.com/oxequa/realize \
+  & go get -v github.com/smartystreets/goconvey \
   & wait
 ENV PATH "${PATH}:${GOROOT}/bin:${GOPATH}/bin"
 WORKDIR ${GOPATH}/src

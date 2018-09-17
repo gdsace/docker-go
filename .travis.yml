@@ -12,8 +12,9 @@ after_script:
 - docker logout
 script:
 # prepare Makefile.properties
-- echo "DOCKERUSER=govtechsg" > Makefile.properties
-- echo "DOCKERREGISTRY=docker.io" >> Makefile.properties
+- echo "DOCKERREGISTRY=docker.io" > Makefile.properties
+- echo "DOCKERUSER=govtechsg" >> Makefile.properties
+- echo "IMAGENAME=golang" >> Makefile.properties
 # check if example works
 - make test.example 
 # run the build/publish, see Makefile for more info

@@ -2,7 +2,7 @@
 include ./Makefile.properties
 
 # general paths so we don't need to keep retyping
-DOCKERREPO=$(DOCKERUSER)/golang
+DOCKERREPO=$(DOCKERUSER)/$(IMAGENAME)
 TAGS_LIST_PATH=./.make.build.tags
 BUILD_ARTIFACTS_PATH=./.make.build.go
 
